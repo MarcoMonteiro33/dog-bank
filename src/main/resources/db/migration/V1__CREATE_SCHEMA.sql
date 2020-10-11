@@ -1,0 +1,4 @@
+CREATE SCHEMA dogbank
+AUTHORIZATION dogbank;
+
+GRANT ALL ON SCHEMA dogbank TO dogbank;
