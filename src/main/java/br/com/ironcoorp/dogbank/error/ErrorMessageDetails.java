@@ -3,6 +3,8 @@ package br.com.ironcoorp.dogbank.error;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ErrorMessageDetails {
 
@@ -11,6 +13,7 @@ public class ErrorMessageDetails {
     private String detalhe;
     private LocalDateTime tempo;
     private String messageDevelper;
+    private List<?> listErros;
 
     protected ErrorMessageDetails() {
     }
@@ -36,12 +39,41 @@ public class ErrorMessageDetails {
         return messageDevelper;
     }
 
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public void setDetalhe(String detalhe) {
+        this.detalhe = detalhe;
+    }
+
+    public void setTempo(LocalDateTime tempo) {
+        this.tempo = tempo;
+    }
+
+    public void setMessageDevelper(String messageDevelper) {
+        this.messageDevelper = messageDevelper;
+    }
+
+    public List<?> getListErros() {
+        return listErros;
+    }
+
+    public void setListErros(List<?> listErros) {
+        this.listErros = listErros;
+    }
+
     public static final class ErrorMessageDetailsBuilder {
         private String titulo;
         private int status;
         private String detalhe;
         private LocalDateTime tempo;
         private String messageDevelper;
+        private List<?> listErros = new ArrayList<>();
 
         private ErrorMessageDetailsBuilder() {
         }
@@ -75,13 +107,20 @@ public class ErrorMessageDetails {
             return this;
         }
 
+        public ErrorMessageDetailsBuilder listErros(List<?> listErros){
+            this.listErros = listErros;
+            return this;
+        }
+
         public ErrorMessageDetails build() {
             ErrorMessageDetails errorMessageDetails = new ErrorMessageDetails();
-            errorMessageDetails.titulo = this.titulo;
-            errorMessageDetails.messageDevelper = this.messageDevelper;
-            errorMessageDetails.detalhe = this.detalhe;
-            errorMessageDetails.tempo = this.tempo;
-            errorMessageDetails.status = this.status;
+            errorMessageDetails.setTitulo(titulo);
+            errorMessageDetails.setMessageDevelper(messageDevelper);
+            errorMessageDetails.setDetalhe(detalhe);
+            errorMessageDetails.setTempo(tempo);
+            errorMessageDetails.setStatus(status);
+            errorMessageDetails.setListErros(listErros);
+
             return errorMessageDetails;
         }
     }
