@@ -28,6 +28,7 @@ public class TutorDTO {
     private String email;
 
     @NotNull(message = "{dataNascimento.not.null}")
+    @Past(message = "{dataNascimento.passado}")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", timezone="GMT-3")
     private LocalDate dataNascimento;
 
@@ -81,7 +82,7 @@ public class TutorDTO {
         return cpf;
     }
 
-    public @NotNull(message = "{cnh.not.null}") @Size(min = 11, message = "{cnh.error}") String getCnh() {
+    public String getCnh() {
         return cnh;
     }
 
@@ -100,7 +101,8 @@ public class TutorDTO {
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
-    public void setCnh(@NotNull(message = "{cnh.not.null}") @Size(min = 11, message = "{cnh.error}") String cnh) {
+
+    public void setCnh(String cnh) {
         this.cnh = cnh;
     }
 
