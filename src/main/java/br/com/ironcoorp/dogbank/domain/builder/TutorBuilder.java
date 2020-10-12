@@ -1,6 +1,7 @@
 package br.com.ironcoorp.dogbank.domain.builder;
 
-import br.com.ironcoorp.dogbank.domain.Etapa;
+import br.com.ironcoorp.dogbank.domain.Endereco;
+import br.com.ironcoorp.dogbank.domain.StatusProposta;
 import br.com.ironcoorp.dogbank.domain.Tutor;
 
 import java.time.LocalDate;
@@ -19,7 +20,9 @@ public class TutorBuilder {
 
     private  String cnh;
 
-    private Etapa etapa;
+    private StatusProposta statusProposta;
+
+    private Endereco endereco;
 
     public TutorBuilder nome(String nome){
         this.nome = nome;
@@ -51,13 +54,18 @@ public class TutorBuilder {
         return this;
     }
 
-    public TutorBuilder status(Etapa etapa){
-        this.etapa = etapa;
+    public TutorBuilder statusProposta(StatusProposta statusProposta){
+        this.statusProposta = statusProposta;
+        return this;
+    }
+
+    public TutorBuilder endereco(Endereco endereco){
+        this.endereco = endereco;
         return this;
     }
 
     public Tutor build(){
-        return new Tutor(nome, sobrenome,email,cpf, cnh, dataNascimento, etapa) ;
+        return new Tutor(nome, sobrenome,email,cpf, cnh, dataNascimento, statusProposta,endereco) ;
     }
 
 

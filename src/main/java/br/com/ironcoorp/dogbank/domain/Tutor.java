@@ -17,14 +17,15 @@ public class Tutor {
     public Tutor() {
     }
 
-    public Tutor(String nome, String sobrenome, String email, String cpf, String cnh, LocalDate dataNascimento, Etapa etapa) {
+    public Tutor(String nome, String sobrenome, String email, String cpf, String cnh, LocalDate dataNascimento, StatusProposta statusProposta, Endereco endereco) {
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.email = email;
         this.cpf = cpf;
         this.cnh = cnh;
         this.dataNascimento = dataNascimento;
-        this.etapa = etapa;
+        this.statusProposta = statusProposta;
+        this.endereco = endereco;
     }
 
     @Id
@@ -41,7 +42,10 @@ public class Tutor {
 
     private String cnh;
 
-    private Etapa etapa;
+    private StatusProposta statusProposta;
+
+    @Embedded
+    private Endereco endereco;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", timezone="GMT-3")
     private LocalDate dataNascimento;
@@ -90,7 +94,44 @@ public class Tutor {
         return dataAlteracao;
     }
 
-    public Etapa getStatus() {
-        return etapa;
+    public Endereco getEndereco() {
+        return endereco;
     }
+
+    public StatusProposta getStatusProposta() {
+        return statusProposta;
+    }
+
+    public void setCodigo(Long codigo) {
+        this.codigo = codigo;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setSobrenome(String sobrenome) {
+        this.sobrenome = sobrenome;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public void setCnh(String cnh) {
+        this.cnh = cnh;
+    }
+
+    public void setStatusProposta(StatusProposta statusProposta) {
+        this.statusProposta = statusProposta;
+    }
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
+
 }

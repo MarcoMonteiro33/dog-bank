@@ -7,7 +7,7 @@ import br.com.ironcoorp.dogbank.exception.IdadeNaoPermitidaException;
 import java.time.LocalDate;
 import java.time.Period;
 
-public class VerificaIdadePermitida implements VerificaConsistenciaDaInformacaoProposta{
+public class VerificaIdadePermitida implements AnaliseDados {
 
     @Override
     public void validaInformacao(TutorDTO tutorDTO) throws RuntimeException {
@@ -16,5 +16,6 @@ public class VerificaIdadePermitida implements VerificaConsistenciaDaInformacaoP
             throw new IdadeNaoPermitidaException(Long.valueOf(idade));
         }
     }
+
 
 }

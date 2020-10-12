@@ -7,7 +7,7 @@ import br.com.ironcoorp.dogbank.repository.TutorRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class VerificaCPFProposta implements VerificaConsistenciaDaInformacaoProposta {
+public class VerificaCPFProposta implements AnaliseDados {
 
     private TutorRepository tutorRepository;
 
