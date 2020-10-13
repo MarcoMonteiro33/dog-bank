@@ -1,11 +1,11 @@
 package br.com.ironcoorp.dogbank.service;
 
 
-import br.com.ironcoorp.dogbank.dto.TutorDTO;
+import br.com.ironcoorp.dogbank.dto.request.PropostaPrimeiraEtapaDTO;
 
 public interface AnaliseDados {
 
-    void validaInformacao(TutorDTO tutorDTO) throws RuntimeException;
+    void validaInformacao(PropostaPrimeiraEtapaDTO propostaPrimeiraEtapaDTO) throws RuntimeException;
     }
 
 
