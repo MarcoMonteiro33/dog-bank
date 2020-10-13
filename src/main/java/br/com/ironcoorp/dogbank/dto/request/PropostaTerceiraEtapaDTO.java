@@ -1,4 +1,4 @@
-package br.com.ironcoorp.dogbank.dto;
+package br.com.ironcoorp.dogbank.dto.request;
 
 import javax.validation.constraints.NotBlank;
 

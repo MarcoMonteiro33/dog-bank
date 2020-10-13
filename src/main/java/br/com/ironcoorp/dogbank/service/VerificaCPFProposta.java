@@ -1,12 +1,12 @@
 package br.com.ironcoorp.dogbank.service;
 
 
-import br.com.ironcoorp.dogbank.dto.TutorDTO;
+import br.com.ironcoorp.dogbank.dto.request.PropostaPrimeiraEtapaDTO;
 import br.com.ironcoorp.dogbank.exception.CPFCadastradoException;
 import br.com.ironcoorp.dogbank.repository.TutorRepository;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-@Service
+@Component
 public class VerificaCPFProposta implements AnaliseDados {
 
     private TutorRepository tutorRepository;
@@ -16,9 +16,9 @@ public class VerificaCPFProposta implements AnaliseDados {
     }
 
     @Override
-    public void validaInformacao(TutorDTO tutorDTO) throws CPFCadastradoException {
-        if(tutorRepository.findByCpf(tutorDTO.getCpf()).isPresent()){
-            throw new CPFCadastradoException(tutorDTO.getCpf());
+    public void validaInformacao(PropostaPrimeiraEtapaDTO propostaPrimeiraEtapaDTO) throws CPFCadastradoException {
+        if(tutorRepository.findByCpf(propostaPrimeiraEtapaDTO.getCpf()).isPresent()){
+            throw new CPFCadastradoException(propostaPrimeiraEtapaDTO.getCpf());
         }
 
     }

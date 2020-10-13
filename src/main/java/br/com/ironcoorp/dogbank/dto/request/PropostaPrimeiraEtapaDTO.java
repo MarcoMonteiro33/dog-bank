@@ -1,4 +1,4 @@
-package br.com.ironcoorp.dogbank.dto;
+package br.com.ironcoorp.dogbank.dto.request;
 
 
 import br.com.ironcoorp.dogbank.domain.Tutor;
@@ -13,7 +13,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 
-public class TutorDTO {
+public class PropostaPrimeiraEtapaDTO {
 
     @NotBlank(message = "{nome.not.blank}")
     @Size(min =  3, max = 50, message = "{nome.size}")
@@ -41,24 +41,24 @@ public class TutorDTO {
      private String cnh;
 
 
-    public static Tutor convertToTutor(TutorDTO tutorDTO) throws EmailCadastradorException, CPFCadastradoException {
+    public static Tutor convertToTutor(PropostaPrimeiraEtapaDTO propostaPrimeiraEtapaDTO) throws EmailCadastradorException, CPFCadastradoException {
         return new TutorBuilder()
-                .nome(tutorDTO.nome)
-                .sobrenome(tutorDTO.sobrenome)
-                .email(tutorDTO.email)
-                .dataNascimento(tutorDTO.dataNascimento)
-                .cpf(tutorDTO.cpf)
-                .cnh(tutorDTO.cnh)
+                .nome(propostaPrimeiraEtapaDTO.nome)
+                .sobrenome(propostaPrimeiraEtapaDTO.sobrenome)
+                .email(propostaPrimeiraEtapaDTO.email)
+                .dataNascimento(propostaPrimeiraEtapaDTO.dataNascimento)
+                .cpf(propostaPrimeiraEtapaDTO.cpf)
+                .cnh(propostaPrimeiraEtapaDTO.cnh)
                 .build();
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof TutorDTO)) return false;
-        TutorDTO tutorDTO = (TutorDTO) o;
-        return getCpf() == tutorDTO.getCpf() &&
-                Objects.equals(getEmail(), tutorDTO.getEmail());
+        if (!(o instanceof PropostaPrimeiraEtapaDTO)) return false;
+        PropostaPrimeiraEtapaDTO propostaPrimeiraEtapaDTO = (PropostaPrimeiraEtapaDTO) o;
+        return getCpf() == propostaPrimeiraEtapaDTO.getCpf() &&
+                Objects.equals(getEmail(), propostaPrimeiraEtapaDTO.getEmail());
     }
 
     @Override
