@@ -1,4 +1,4 @@
 package br.com.ironcoorp.dogbank.dto;
 
-public interface DadosPropostaDTO {
+public abstract class DadosPropostaDTO {
 }

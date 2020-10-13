@@ -64,18 +64,33 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(menssageError, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(TutorNotFoundException.class)
-    public ResponseEntity<?> handlerErrorExpection(TutorNotFoundException error){
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<?> handlerErrorExpection(IllegalArgumentException error){
         ErrorMessageDetails menssageError =   ErrorMessageDetails.ErrorMessageDetailsBuilder
                 .newBuilder()
                 .tempo(LocalDateTime.now())
                 .status(HttpStatus.BAD_REQUEST.value())
-                .titulo("Tutor não Localizado")
+                .titulo(error.getMessage())
                 .detalhe(error.getMessage())
                 .messageDevelper(error.getClass().getName())
                 .build();
 
         return new ResponseEntity<>(menssageError, HttpStatus.BAD_REQUEST);
+    }
+
+
+    @ExceptionHandler(TutorNotFoundException.class)
+    public ResponseEntity<?> handlerErrorExpection(TutorNotFoundException error){
+        ErrorMessageDetails menssageError =   ErrorMessageDetails.ErrorMessageDetailsBuilder
+                .newBuilder()
+                .tempo(LocalDateTime.now())
+                .status(HttpStatus.NOT_FOUND.value())
+                .titulo("Tutor não Localizado")
+                .detalhe(error.getMessage())
+                .messageDevelper(error.getClass().getName())
+                .build();
+
+        return new ResponseEntity<>(menssageError, HttpStatus.NOT_FOUND);
     }
 
     /**@Override

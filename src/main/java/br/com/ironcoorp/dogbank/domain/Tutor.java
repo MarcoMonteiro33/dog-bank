@@ -47,6 +47,9 @@ public class Tutor {
     @Embedded
     private Endereco endereco;
 
+    @OneToOne
+    private Documento documento;
+
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", timezone="GMT-3")
     private LocalDate dataNascimento;
 
@@ -133,5 +136,11 @@ public class Tutor {
         this.endereco = endereco;
     }
 
+    public Documento getDocumento() {
+        return documento;
+    }
 
+    public void setDocumento(Documento documento) {
+        this.documento = documento;
+    }
 }
