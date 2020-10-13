@@ -42,6 +42,7 @@ public class Tutor {
 
     private String cnh;
 
+    @Enumerated(EnumType.STRING)
     private StatusProposta statusProposta;
 
     @Embedded

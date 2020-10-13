@@ -2,6 +2,7 @@ package br.com.ironcoorp.dogbank.service;
 
 
 import br.com.ironcoorp.dogbank.domain.Documento;
+import br.com.ironcoorp.dogbank.domain.StatusProposta;
 import br.com.ironcoorp.dogbank.domain.Tutor;
 import br.com.ironcoorp.dogbank.dto.response.EtapaResponseDTO;
 import br.com.ironcoorp.dogbank.dto.response.PropostaTutorResponseDTO;
@@ -42,6 +43,7 @@ public class TerceiraEtapaService {
         }
         Tutor tutor = validaDadosEtapa(id);
         tutor.setDocumento(criaUploadDocumento(file, id));
+        tutor.setStatusProposta(StatusProposta.ANDAMENTO);
         return processaMensagemRetorno(tutorRepository.save(tutor).getCodigo());
     }
 

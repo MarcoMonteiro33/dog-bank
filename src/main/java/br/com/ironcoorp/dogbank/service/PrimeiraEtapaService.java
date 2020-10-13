@@ -33,7 +33,7 @@ public class PrimeiraEtapaService {
         analiseEmail.validaInformacao(propostaPrimeiraEtapaDTO);
 
         Tutor tutor = PropostaPrimeiraEtapaDTO.convertToTutor(propostaPrimeiraEtapaDTO);
-        tutor.setStatusProposta(StatusProposta.ANDAMENTO);
+        tutor.setStatusProposta(StatusProposta.INICIADA);
 
         return processaMensagemRetorno(tutorRepository.save(tutor).getCodigo());
 

@@ -22,8 +22,6 @@ public class SegundaEtapaService {
     public EtapaResponseDTO processar(PropostaSegundaEtapaDTO propostaSegundaEtapaDTO, Long id){
 
         Tutor tutor = tutorRepository.findById(id).orElseThrow(() -> new TutorNotFoundException(id));
-        tutor.setStatusProposta(StatusProposta.ANDAMENTO);
-
         tutor.setEndereco(Endereco.Builder
                 .newBuilder()
                 .cep(propostaSegundaEtapaDTO.getCep())
@@ -34,6 +32,7 @@ public class SegundaEtapaService {
                 .uf(propostaSegundaEtapaDTO.getUf())
                 .build()
         );
+        tutor.setStatusProposta(StatusProposta.COMPLEMENTO);
 
         return processaMensagemRetorno(tutorRepository.save(tutor).getCodigo());
     }
