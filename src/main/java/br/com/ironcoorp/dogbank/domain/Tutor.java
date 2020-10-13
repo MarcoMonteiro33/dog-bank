@@ -1,5 +1,7 @@
 package br.com.ironcoorp.dogbank.domain;
 
+import br.com.ironcoorp.dogbank.state.*;
+import br.com.ironcoorp.dogbank.utils.GeraInstanciaStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -26,6 +28,7 @@ public class Tutor {
         this.dataNascimento = dataNascimento;
         this.statusProposta = statusProposta;
         this.endereco = endereco;
+        this.propostaState = new PropostaIniciadaState();
     }
 
     @Id
@@ -42,7 +45,11 @@ public class Tutor {
 
     private String cnh;
 
+    @Enumerated(EnumType.STRING)
     private StatusProposta statusProposta;
+
+    @Transient
+    private PropostaState propostaState;
 
     @Embedded
     private Endereco endereco;
@@ -143,4 +150,33 @@ public class Tutor {
     public void setDocumento(Documento documento) {
         this.documento = documento;
     }
+
+    public void iniciaProposta(){
+        propostaState.iniciaProposta(this);
+    }
+
+    public void complementoProposta(){
+        propostaState = criarPropostaState();
+        propostaState.complementoProposta(this);
+    }
+
+    public void andamentoProposta(){
+        propostaState = criarPropostaState();
+        propostaState.andamentoProposta(this);
+    }
+
+    public void aceiteProposta(){
+        propostaState = criarPropostaState();
+        propostaState.aceiteProposta(this);
+    }
+
+    public void concluiProposta(){
+        propostaState = criarPropostaState();
+        propostaState.finalizaProposta(this);
+    }
+
+    public PropostaState criarPropostaState(){
+        return GeraInstanciaStatus.criaInstancia(this.statusProposta);
+    }
+
 }

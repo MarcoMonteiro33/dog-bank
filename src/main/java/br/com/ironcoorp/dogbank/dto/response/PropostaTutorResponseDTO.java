@@ -1,7 +1,5 @@
 package br.com.ironcoorp.dogbank.dto.response;
 
-
-import br.com.ironcoorp.dogbank.domain.StatusProposta;
 import br.com.ironcoorp.dogbank.domain.Tutor;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.stereotype.Component;
@@ -40,8 +38,6 @@ public class PropostaTutorResponseDTO implements Serializable {
 
     private String cnh;
 
-    private StatusProposta statusProposta;
-
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", timezone="GMT-3")
     private LocalDate dataNascimento;
 
@@ -77,10 +73,6 @@ public class PropostaTutorResponseDTO implements Serializable {
 
     public String getCnh() {
         return cnh;
-    }
-
-    public StatusProposta getStatusProposta() {
-        return statusProposta;
     }
 
     public LocalDate getDataNascimento() {

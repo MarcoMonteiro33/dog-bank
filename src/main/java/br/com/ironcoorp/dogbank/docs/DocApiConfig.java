@@ -35,7 +35,7 @@ public class DocApiConfig {
 
     private ApiInfo metaData(){
         return new ApiInfoBuilder()
-                .title("API Dog Bank")
+                .title("API DOGBank")
                 .description("Um Banco Digital desenvolvido para Tutores de Pets.")
                 .version("1.0")
                 .contact(new Contact("Marco Monteiro","https://www.linkedin.com/in/marcoasmonteiro/","marco.mont33@gmail.com"))

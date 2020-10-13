@@ -132,7 +132,8 @@ public class PropostaTutorController {
     @ApiResponses({
             @ApiResponse(code = 200, message = "Solicitaçao de Proposta Finalizada", response = EtapaResponseDTO.class),
             @ApiResponse(code = 400, message = "Erro na Solicitação", response = ErrorMessageDetails.class),
-            @ApiResponse(code = 404, message = "A Proposta não foi localizada", response = ErrorMessageDetails.class)
+            @ApiResponse(code = 404, message = "A Proposta não foi localizada", response = ErrorMessageDetails.class),
+            @ApiResponse(code = 422, message = "Dados Anteriores incompletos", response = ErrorMessageDetails.class)
     })
     public ResponseEntity<?> newPropostaQuartaEtapaAceite(@PathVariable(name = "id") Long id,
                                                           @PathVariable(name = "aceite") Boolean aceite,

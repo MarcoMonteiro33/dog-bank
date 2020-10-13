@@ -2,10 +2,7 @@ package br.com.ironcoorp.dogbank.handler;
 
 import br.com.ironcoorp.dogbank.error.ErrorMessageDetails;
 import br.com.ironcoorp.dogbank.error.ValidationErrorDetails;
-import br.com.ironcoorp.dogbank.exception.CPFCadastradoException;
-import br.com.ironcoorp.dogbank.exception.EmailCadastradorException;
-import br.com.ironcoorp.dogbank.exception.IdadeNaoPermitidaException;
-import br.com.ironcoorp.dogbank.exception.TutorNotFoundException;
+import br.com.ironcoorp.dogbank.exception.*;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -63,6 +60,21 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
         return new ResponseEntity<>(menssageError, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(StatusPropostaException.class)
+    public ResponseEntity<?> handlerErrorExpection(StatusPropostaException error){
+        ErrorMessageDetails menssageError =   ErrorMessageDetails.ErrorMessageDetailsBuilder
+                .newBuilder()
+                .tempo(LocalDateTime.now())
+                .status(HttpStatus.UNPROCESSABLE_ENTITY.value())
+                .titulo("Validação do Status da Proposta")
+                .detalhe(error.getMessage())
+                .messageDevelper(error.getClass().getName())
+                .build();
+
+        return new ResponseEntity<>(menssageError, HttpStatus.UNPROCESSABLE_ENTITY);
+    }
+
 
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<?> handlerErrorExpection(IllegalArgumentException error){
