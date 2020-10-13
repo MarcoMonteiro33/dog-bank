@@ -1,7 +1,5 @@
 package br.com.ironcoorp.dogbank.service;
 
-
-import br.com.ironcoorp.dogbank.domain.StatusProposta;
 import br.com.ironcoorp.dogbank.domain.Tutor;
 import br.com.ironcoorp.dogbank.dto.request.PropostaPrimeiraEtapaDTO;
 import br.com.ironcoorp.dogbank.dto.response.EtapaResponseDTO;
@@ -33,7 +31,8 @@ public class PrimeiraEtapaService {
         analiseEmail.validaInformacao(propostaPrimeiraEtapaDTO);
 
         Tutor tutor = PropostaPrimeiraEtapaDTO.convertToTutor(propostaPrimeiraEtapaDTO);
-        tutor.setStatusProposta(StatusProposta.INICIADA);
+
+        tutor.iniciaProposta();
 
         return processaMensagemRetorno(tutorRepository.save(tutor).getCodigo());
 

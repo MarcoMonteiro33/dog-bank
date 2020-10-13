@@ -33,7 +33,8 @@ public class QuartaEtapaService {
 
     public PropostaTutorResponseDTO processar(Long id){
         var tutor = validaDadosEtapa(id);
-        tutor.setStatusProposta(StatusProposta.ACEITE);
+        tutor.aceiteProposta();
+        //tutor.setStatusProposta(StatusProposta.ACEITE);
         tutorRepository.save(tutor);
         return propostaTutorResponseDTO.convertToDTO(tutor);
     }
@@ -42,7 +43,8 @@ public class QuartaEtapaService {
 
        Tutor tutor = validaDadosEtapa(id);
        if(aceite) {
-           tutor.setStatusProposta(StatusProposta.CONCLUIDO);
+           //tutor.setStatusProposta(StatusProposta.CONCLUIDO);
+           tutor.concluiProposta();
            tutorRepository.save(tutor);
            return processaMensagemRetorno(msgAceite, tutor);
        }
