@@ -2,14 +2,20 @@ package br.com.ironcoorp.dogbank.docs;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.builders.ResponseMessageBuilder;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
+import springfox.documentation.service.ResponseMessage;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static springfox.documentation.builders.PathSelectors.regex;
 
@@ -24,7 +30,7 @@ public class DocApiConfig {
                     .apis(RequestHandlerSelectors.basePackage("br.com.ironcoorp.dogbank.controller"))
                     .paths(regex("/v1.*"))
                     .build()
-                .apiInfo(metaData());
+                    .apiInfo(metaData());
     }
 
     private ApiInfo metaData(){
@@ -35,12 +41,5 @@ public class DocApiConfig {
                 .contact(new Contact("Marco Monteiro","https://www.linkedin.com/in/marcoasmonteiro/","marco.mont33@gmail.com"))
                 .build();
     }
-
-    protected void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("swagger-ui.html")
-                .addResourceLocations("classpath:/META-INF/resources/");
-        registry.addResourceHandler("/webjars/**")
-         .addResourceLocations("classpath:/META-INF/resources/webjars/");
-         }
 }
 

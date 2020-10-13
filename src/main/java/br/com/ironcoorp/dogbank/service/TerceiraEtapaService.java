@@ -42,7 +42,6 @@ public class TerceiraEtapaService {
         }
         Tutor tutor = validaDadosEtapa(id);
         tutor.setDocumento(criaUploadDocumento(file, id));
-        //return propostaTutorResponseDTO.convertToDTO(tutorRepository.save(tutor));
         return processaMensagemRetorno(tutorRepository.save(tutor).getCodigo());
     }
 

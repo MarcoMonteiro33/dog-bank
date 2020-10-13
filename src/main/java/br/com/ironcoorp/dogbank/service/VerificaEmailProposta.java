@@ -3,9 +3,10 @@ package br.com.ironcoorp.dogbank.service;
 import br.com.ironcoorp.dogbank.dto.request.PropostaPrimeiraEtapaDTO;
 import br.com.ironcoorp.dogbank.exception.EmailCadastradorException;
 import br.com.ironcoorp.dogbank.repository.TutorRepository;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-@Service
+@Component
 public class VerificaEmailProposta implements AnaliseDados {
 
     private final TutorRepository tutorRepository;
