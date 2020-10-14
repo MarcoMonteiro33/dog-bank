@@ -9,17 +9,18 @@ http://localhost:8080/swagger-ui.html
 
 #Referências Utilizadas para o Desenvolvimento:
 
-*Caellum
+# Caellum
 
-Kafka: Produtores, Consumidores e streams
+
+# Kafka: Produtores, Consumidores e streams
 https://www.alura.com.br/curso-online-kafka-introducao-a-streams-em-microservicos
 
-*Spring
+# Spring
 
 https://spring.io/guides/tutorials/rest/
 
 https://spring.io/guides/gs/uploading-files/
 
-Swagger
+# Swagger
 
 https://www.baeldung.com/swagger-2-documentation-for-spring-rest-api
