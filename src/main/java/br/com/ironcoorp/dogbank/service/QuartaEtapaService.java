@@ -5,10 +5,13 @@ import br.com.ironcoorp.dogbank.domain.Tutor;
 import br.com.ironcoorp.dogbank.dto.response.EtapaResponseDTO;
 import br.com.ironcoorp.dogbank.dto.response.PropostaTutorResponseDTO;
 import br.com.ironcoorp.dogbank.exception.TutorNotFoundException;
+import br.com.ironcoorp.dogbank.messaging.KafkaDispatcher;
 import br.com.ironcoorp.dogbank.repository.TutorRepository;
 import br.com.ironcoorp.dogbank.utils.GeraDadosBancarios;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.concurrent.ExecutionException;
 
 
 @Service
@@ -34,8 +37,8 @@ public class QuartaEtapaService {
     public PropostaTutorResponseDTO processar(Long id){
         var tutor = validaDadosEtapa(id);
         tutor.aceiteProposta();
-        //tutor.setStatusProposta(StatusProposta.ACEITE);
         tutorRepository.save(tutor);
+        enviaSolicitacaoPropostaAutenticacao(tutor);
         return propostaTutorResponseDTO.convertToDTO(tutor);
     }
 
@@ -43,9 +46,9 @@ public class QuartaEtapaService {
 
        Tutor tutor = validaDadosEtapa(id);
        if(aceite) {
-           //tutor.setStatusProposta(StatusProposta.CONCLUIDO);
            tutor.concluiProposta();
            tutorRepository.save(tutor);
+
            return processaMensagemRetorno(msgAceite, tutor);
        }
         tutor.setStatusProposta(StatusProposta.CANCELADA);
@@ -60,6 +63,16 @@ public class QuartaEtapaService {
 
     public EtapaResponseDTO processaMensagemRetorno(String mensagem, Tutor tutor){
         return new EtapaResponseDTO(tutor.getNome()+ " "+mensagem, tutor.getCodigo());
+    }
+    public void enviaSolicitacaoPropostaAutenticacao(Tutor tutor){
+        var kafka = new KafkaDispatcher();
+        try {
+            kafka.send("PROPOSTA_CONTA_DIGITAL","PROPOSTA_CODIGO"+tutor.getCodigo().toString());
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
 

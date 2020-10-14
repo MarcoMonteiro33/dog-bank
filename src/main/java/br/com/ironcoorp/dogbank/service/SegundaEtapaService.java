@@ -2,13 +2,11 @@ package br.com.ironcoorp.dogbank.service;
 
 
 import br.com.ironcoorp.dogbank.domain.Endereco;
-import br.com.ironcoorp.dogbank.domain.StatusProposta;
 import br.com.ironcoorp.dogbank.domain.Tutor;
 import br.com.ironcoorp.dogbank.dto.request.PropostaSegundaEtapaDTO;
 import br.com.ironcoorp.dogbank.dto.response.EtapaResponseDTO;
 import br.com.ironcoorp.dogbank.exception.TutorNotFoundException;
 import br.com.ironcoorp.dogbank.repository.TutorRepository;
-import br.com.ironcoorp.dogbank.state.PropostaState;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -34,7 +32,6 @@ public class SegundaEtapaService {
                 .build()
         );
 
-        //tutor.setStatusProposta(StatusProposta.COMPLEMENTO);
 
         tutor.complementoProposta();
 

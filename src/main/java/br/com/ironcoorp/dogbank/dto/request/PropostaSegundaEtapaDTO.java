@@ -3,14 +3,12 @@ package br.com.ironcoorp.dogbank.dto.request;
 
 
 
-import br.com.ironcoorp.dogbank.dto.DadosPropostaDTO;
-
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 
-public class PropostaSegundaEtapaDTO extends DadosPropostaDTO {
+public class PropostaSegundaEtapaDTO {
 
     @NotBlank(message = "{cep.not.blank}")
     @Pattern(regexp = "\\d{5}[-]\\d{3}", message = "{cep.incorreto}")

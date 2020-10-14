@@ -6,6 +6,8 @@ public enum StatusProposta {
     ANDAMENTO,
     ACEITE,
     CONCLUIDO,
-    CANCELADA;
+    CANCELADA,
+    LIBERADA,
+    REJEITADA
 }
 
