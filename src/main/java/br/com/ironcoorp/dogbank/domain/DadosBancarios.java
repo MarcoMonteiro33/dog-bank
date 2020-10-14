@@ -1,7 +1,5 @@
 package br.com.ironcoorp.dogbank.domain;
 
-
-
 public class DadosBancarios {
 
     public DadosBancarios(String agencia, String conta) {
