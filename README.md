@@ -14,6 +14,7 @@ http://localhost:8080/swagger-ui.html
 
 # Kafka: Produtores, Consumidores e streams
 https://www.alura.com.br/curso-online-kafka-introducao-a-streams-em-microservicos
+
 https://medium.com/@bs745645/como-instalar-o-apache-kafka-no-ubuntu-18-04-b60171500b6e
 
 # Spring
