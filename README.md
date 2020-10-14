@@ -1,4 +1,4 @@
-# dog-bank
+# DOGBbank
 Um Banco Digital desenvolvido para Tutores de Pets.
 
 Acessa a Documentação
