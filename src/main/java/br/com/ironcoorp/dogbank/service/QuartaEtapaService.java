@@ -38,7 +38,7 @@ public class QuartaEtapaService {
         var tutor = validaDadosEtapa(id);
         tutor.aceiteProposta();
         tutorRepository.save(tutor);
-        enviaSolicitacaoPropostaAutenticacao(tutor);
+        ///enviaSolicitacaoPropostaAutenticacao(tutor);
         return propostaTutorResponseDTO.convertToDTO(tutor);
     }
 

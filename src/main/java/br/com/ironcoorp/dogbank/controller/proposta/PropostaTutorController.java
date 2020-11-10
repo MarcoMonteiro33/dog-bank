@@ -14,6 +14,12 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -45,12 +51,16 @@ public class PropostaTutorController {
     @Autowired
     QuartaEtapaService quartaEtapaService;
 
+    @Autowired
+    PropostaService propostaService;
+
     @PostMapping(path = "tutores/etapa1")
     @ApiOperation(value = "Criar Solicitaçao de Proposta para conta digital: Etapa-1", tags = {"Proposta-Tutores"})
     @ApiResponses({
         @ApiResponse(code = 201, message = "Dados enviados com Sucesso", response = EtapaResponseDTO.class),
         @ApiResponse(code = 400, message = "Erro na Solicitação", response = ErrorMessageDetails.class)
     })
+    @CacheEvict(value = "listaDePropostas", allEntries = true)
     public  ResponseEntity<?> criarProposta(@Valid @RequestBody PropostaPrimeiraEtapaDTO propostaPrimeiraEtapaDto
                                             ,HttpServletRequest request) throws EmailCadastradorException {
 
@@ -69,6 +79,7 @@ public class PropostaTutorController {
             @ApiResponse(code = 400, message = "Erro na Solicitação", response = ErrorMessageDetails.class),
             @ApiResponse(code = 404, message = "A Proposta não foi localizada", response = ErrorMessageDetails.class)
             })
+    @CacheEvict(value = "listaDePropostas", allEntries = true)
     public ResponseEntity<?> newTutorSegundaEtapa(@PathVariable(name = "id") Long id,
                                                   @Valid
                                                   @RequestBody PropostaSegundaEtapaDTO propostaSegundaEtapaDTO,
@@ -89,6 +100,7 @@ public class PropostaTutorController {
             @ApiResponse(code = 400, message = "Erro na Solicitação", response = ErrorMessageDetails.class),
             @ApiResponse(code = 404, message = "A Proposta não foi localizada", response = ErrorMessageDetails.class)
     })
+    @CacheEvict(value = "listaDePropostas", allEntries = true)
     public ResponseEntity<?> newPropostaTerceiraEtapa(@PathVariable(name = "id") Long id,
                                                       MultipartFile arquivoUpload,
                                                       HttpServletRequest request)  {
@@ -126,6 +138,42 @@ public class PropostaTutorController {
                 .header(HttpHeaders.LOCATION, String.valueOf(location))
                 .body(responseDTO);
     }
+
+//    @GetMapping(value = "tutores")
+//    @ApiOperation(value = "Listar todas as Propostas com Paginação", tags = {"Proposta-Tutores"})
+//    @ApiResponses({
+//            @ApiResponse(code = 200, message = "Visualizar Propostas", response = PropostaTutorResponseDTO.class),
+//            @ApiResponse(code = 400, message = "Erro na Solicitação", response = ErrorMessageDetails.class),
+//               })
+//    public ResponseEntity<?> getAllPropostas(@RequestParam(required = false) String nome,
+//                                             @RequestParam int pagina,
+//                                             @RequestParam int qtd,
+//                                             @RequestParam String ordenacao)  {
+//        Pageable paginacao = PageRequest.of(pagina,qtd, Sort.Direction.ASC, ordenacao);
+//
+//        Page<Tutor> listProposta = propostaService.findAll(paginacao);
+//
+//          return ResponseEntity.status(HttpStatus.OK)
+//                    .body(listProposta);
+//    }
+
+    @GetMapping(value = "tutores")
+    @ApiOperation(value = "Listar todas as Propostas com Paginação", tags = {"Proposta-Tutores"})
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Visualizar Propostas", response = PropostaTutorResponseDTO.class),
+            @ApiResponse(code = 400, message = "Erro na Solicitação", response = ErrorMessageDetails.class),
+    })
+    @Cacheable(value = "listaDePropostas")
+    public ResponseEntity<?> getAllPropostasPage(@RequestParam(required = false) String nome,
+                                             @PageableDefault(sort = "nome", direction = Sort.Direction.DESC, size = 10)  Pageable pageable)  {
+
+
+        Page<Tutor> listProposta = propostaService.findAll(pageable);
+
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(listProposta);
+    }
+
 
     @PutMapping(value = "tutores/{id}/etapa4/dados/{aceite}")
     @ApiOperation(value = "Finaliza Solicitaçao da Proposta: Etapa-4", tags = {"Proposta-Tutores"})

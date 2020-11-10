@@ -10,6 +10,8 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.mockito.Mockito;
 
+import java.time.LocalDate;
+
 public class TutorBuilderTest {
 
     private TutorRepository tutorRepository;
@@ -30,7 +32,7 @@ public class TutorBuilderTest {
 
         tutorBuilder.nome("Marco")
                 .sobrenome("Monteiro")
-               // .DataNascimento(LocalDate.now())
+                .dataNascimento(LocalDate.now())
                 .cnh("11111111111l")
                 .cpf("11111111111")
                 .build();
